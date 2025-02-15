@@ -1,0 +1,434 @@
+Notas:
+
+ 1.- Repl ( Read Evaluate Print Loop)
+      repl.it    
+      https://replit.com/  
+      ideone      prolog racket rust go dart python
+      onlinegdb   
+
+
+    Herramientas    : emacs
+                      Visual Studio Code
+    Lenguaje de Programacion SML/NJ     /Moscow
+      
+    Libro de texto:  "Modern Compiler Implementation in ML"
+                      Andrew Appel
+                      Cambridge University Press
+
+      Con a = 6  b = 12   c = 18
+       
+      a  *  b  +  c          
+
+     El        garrilipio truncador barpasa el     camino.
+     articulo  nombre     adjetivo  verbo  articulo nombre      
+                  sujeto                  predicado
+                          sentencia  
+
+     Truncador el garriplio camino barpasa el
+
+     Usando azucar 
+    int a = 1, c = 5;
+    if(a) c = 7;
+
+
+     val a = 5
+
+     fun circleArea r = Math.pi * r * r; 
+
+
+    fun sqri a :int = a * a;
+    val lis =    (1,2,3,4) 
+    val ls = map sqri lis; 
+    val head ls
+
+ (1,4,9,16) 
+
+
+    val b = sqri 4;
+
+
+   Expresion regular
+   Meta símbolos de las expresiones regulares: * , + , ^, [], ?  () 
+
+   val x =  ( 4, 6 ,9);
+   val y =   (3, 7, 9 );
+   val ls = merege(x, y);  (*  (3,4,6,7,9 ) *)
+    
+---------------------------------------------------------------------
+
+
+ fun fact n  = 
+     if n = 0 then 1 else n * fact ( n )  - 1 ;
+
+  Gramática -> (S, R, N, T )
+
+   ls -ld /etc/[^d-lp-v]*
+
+  Expresión regular que representa los números pares
+    1(0|1)*0
+
+
+ Url para un repl sml
+
+  https://sosml.org/  
+
+ Evaluar expresión aritmética ( con la gramática clásica) :
+
+              4 + 8 / 2 * 3 - 5   -> 11
+
+              4  /  5  *  5      -> 0
+ 
+              4  *  5  / 5        -> 4
+
+              3 ** 2 ** 2         -> 81 
+
+  Ambigüedad
+
+     if(a > b) a = 1;
+        if(a ==  b) a = 2;
+        else a = 3;
+     if(a > b){ a = 1;
+        if(a ==  b) a = 2;
+       }  else a = 3;
+
+
+ En bash no hay ambigüedad:
+
+  if test  .eq $a  $b
+  then echo "hola"
+     if test  $a
+       then echo "mundo"
+      fi
+     else echo "fin"
+  fi
+
+  if test  .eq $a  $b
+  then echo "hola"
+     if test  $a
+        then echo "mundo"
+        else echo "fin"
+      fi
+  fi
+
+  Expresión  a^m b^n  / m,n >= 0  es gramática  regular
+  Expresión  a^n b^n  / n >= 0   no es gramática  regular
+             a* b*    es lenguaje regular
+
+  Lenguaje de números binarios pares nos lo da la expresión regular:
+    1(0|1)*0  -> L(1.(0.1)*.0)
+
+Lenguaje L(b*(abb*)*(a|ε) )
+         {ε, b, bab, babbb, babbba }
+
+Lenguaje  [_a-zA-Z][A-Za-z0-9]*  -->     
+
+  if
+  [_a-zA-Z][A-Za-z0-9]*  
+ Si tenemos de entrada -> ifallah
+
+ Jerarquía de gramáticas segun Chomsky
+ tipo     Nombre                                   Autómat  
+  3       regular         A -> abc   A -> abcB    AFN  o AFD       (lex, flex)
+  2       contexto libre  A -> ω                  Automata de Pila (yacc) 
+  1       sensible al contexto (no contractil)    
+  0       contractil ( de Turing )                Maquina de Turing 
+
+Transformar un AFN en uno AFD
+ a.- Eliminar los ciclos  ε
+ b.- Eliminar transiciones ε 
+ c.-  
+
+ 
+Gramáticas de Contexto Libre CFG
+Automata de Pila
+Usamos YACC (Yet Another Compiler Compiler)
+
+Tarea 1 
+ Problema 2  mes ->  3, fechas -> [(1996,2,23),(1998,3,13),(2000,4,12),(2005,3,29),(2007,4,11)]
+              Respuesta 2 
+ Problema 3  meses ->  [2,3], fechas -> [(1996,2,23),(1998,3,13),(2000,4,12),(2005,3,29),(2007,4,11)]
+              Respuesta 3
+ Problema 4  mes ->  3,  fechas -> [(1996,2,23),(1998,3,13),(2000,4,12),(2005,3,29),(2007,4,11)]
+              Respuesta [(1198, 3,13),(2005,3,29)] 
+
+
+Ambigüedad
+     A ->  A o A  |  B  --> B (o B o B)*
+   Conversión
+     A ->  A o C  | C
+     C ->  C o B  | ε
+
+Recursividad izquierda se elimina asÍ:
+     A  -> A B  |  B    no puede ser de contexto libre.
+ Las nuevas producciones
+     A ->  B  R     
+     R ->  B  R | ε
+
+2021-02-15
+
+Ejemplo 1
+ Valor sintáctico de () en if
+ int a = 5, b = 10, c;
+ if(a < b) 
+    c = a + b;
+ c = c - b;
+
+cmp ax, bx
+jge L1
+  add ax, bx
+  mov cx, ax
+L1:
+sub cx, bx 
+
+Ejemplo 2
+ Alcance de variables
+
+ int i = 20, a = 0;
+ for(int i = 0; i < 5; i++)
+     a += i;
+ a += i;
+
+ Ejemplo 3. Arreglo en C
+
+  int a[4]  = {1,2,3,4};
+  int b     = 5
+  int c ;
+      c = a[0] ;
+      c = a[4];
+ 
+ Ejemplo 
+    register a;  
+
+https://www.cs.princeton.edu/~appel/modern/ml/smlnj109.30/
+https://course.ccs.neu.edu/csu4410/projects/
+
+t2 :  https://course.ccs.neu.edu/csu4410/projects/2.html
+
+Registros para arquitectura X86 (CISC)
+
+8008       -> máquina registros de 8 bits       (80) 
+8086       -> máquina registros de 16 bits      (140)
+80286      -> máquina registros de 32 bits
+80386      -> máquina registros de 32 bits
+80486      -> máquina registros de 64 bits
+pentium    -> máquina registros de 64 bits     (1300 instrucciones)
+ii[3579]   -> máquina registros de 64 bits
+
+Arq de 8 bits
+AH  AL  BH  BL  CH CL DH DL
+
+Arq de 16 bits
+
+AX   BX   CX  DX
+DS   ES   SS  CS
+SI   DI
+SP   BP   PC  
+
+Arq de 32 bits
+
+EAX   EBX   ECX  EDX
+EDS   EES   ESS  ECS
+ERI   EDI
+ESP   EBP   EPC  
+
+
+Arq de 64 bits
+
+RAX   RBX   RCX  RDX
+RDS   RES   RSS  RCS
+RRI   RDI
+RSP   RBP   RPC  
+
+ xor AX AX
+ mov AX  0
+
+2021-02-24
+ Assembler X86  Assembler : AT&T vs  Intel
+
+2021-03-01
+
+2021-03-15
+
+https://www.cs.cmu.edu/~rwh/introsml/modules/sigstruct.htm
+ 2021-03-22
+
+Representación de grafo:
+                                     c
+                                   /   \   
+(1) ( (a,c), (b,c))               a     b 
+ 
+
+(2) ((a,b), (a,c), (a,d), (a,e)*, (r1,r2), (r1,r3)
+     (r1,c), (r1,a)*, (r1,d)*,       
+
+
+Ahead-of-time (AOT) compilation
+
+
+What Is Just-In-Time (JIT) Compilation?
+Anthony Heddings
+
+
+1.- Acción semántica
+
+E -> E +  T [1] | T
+T -> T *  F [1] | F
+F ->  (E)       | id 
+
+Dada 
+    a * (b + c) -> salida                         
+quiero acciones semánticas que generen notación polaca inversa
+
+E -> E + [2] T [1] | T
+T -> T * [2] F [1] | F
+F ->  (E)          | id [3]
+
+3 -> escribir id
+2 -> push operador
+1 -> pop() operador;  t = escribir(t)
+       
+  E -> T *[2]  F[3] -> T *[2] F[1] ->T * [2] ( E ) [1] -> T * [2] ( E +[2] T[1] ) [1] -> 
+       T * [2] ( T +[2] T[1] ) [1] ->    F * [2] ( F +[2] F[1] ) [1] -> 
+        a [3] * [2] ( b[3] +[2] c[3] [1] ) [1] -> 
+                            
+                          +                  
+    a  b  c + *           *
+    
+   struct nodo{
+       info  INFO;
+       left  *struct nodo
+       right  *struct nodo
+    } 
+
+2.-  Gramática
+ 
+Toda expresion aritmetica infija puede ser expresada en forma
+    parentizada.
+    Ejemplo :  a * b + c + e * f  = ( ( ( a * b ) + c ) + ( e * f ) )
+    Si se tiene la gram tica :
+
+      S -> S e R  |  a S  |  S u R  |  R
+      R -> R i T  |  o R  |  T
+      T -> b | c  | d  | f  | g  | h
+
+   Donde  a, e, i, o, u son operadores.
+   Si se da la expresión
+                          a b i c u o d e f
+   Expresela en forma parentizada.
+  Nos vamos al arbol
+
+  S-> aS -> aSeR -> aSuReR  -> aRuReR  -> aRiTuReR -> aTiTuReR -> aTiTuoTeT ->
+                                        S                      
+                                     a  S
+                                        S e  R 
+     abicuodef
+
+
+3.- Diseñe un traductor que acepte  un string binario  a1a2a3... y calcula el valor binario de tres bits consecutivos modulo 5. Especificamente, el traductor generara m1m2m3...  donde
+        m1 = m2 = 0
+        mi = (4ai + 2a(i -1) + a(i-2)) modulo 5, i = 3,4 ...
+ 
+
+   Generando strings
+    S -> (0 | 1) A (0) 
+    A -> (0 | 1) C (1)    
+    C -> (0 | 1) S (2)
+
+  
+ 4.-
+SM01.  Escriba una función que determine el número de ocurrencias de cada cadena en una lista de cadenas. La entrada es una lista de cadenas y la salida es una lista de pares de cadenas / enteros, dando el número de apariciones de cada cadena en la lista. Por ejemplo, si la entrada es:
+         ["A", "B", "A", "C", "B", "B", "D", "C"],
+la salida es
+         [("A", 2), ("B", 3), ("C", 2), ("D", 1)].
+
+Las tuplas pueden aparecer en cualquier orden.
+
+Es posible que desee definir y utilizar funciones adicionales.
+
+Proporcione una breve descripción de su algoritmo para ayudar con
+la clasificación.
+
+- Este algoritmo funciona contando el número de ocurrencias de la cabeza en la lista, y luego borra todas las ocurrencias de la cabeza antes de hacer la llamada recursiva.
+
+
+5.- 
+
+Se tiene este programa de 15 instrucciones:
+ 1   m <-  0                     
+ 2   v <-  0                  
+ 3   if v >= n goto 15         
+ 4   r <- v                     
+ 5   s <-  0                    
+ 6   if r< n goto 9            
+ 7   v <- v + 1                
+ 8   goto 3
+ 9  x <- M[r]
+10  s <- s + x
+11  if s <= m goto13
+12  m <- s
+13  r <- r + 1
+14  got 6
+15  return m
+
+Realice un análisis de flujo del programa
+Calcule la vivencia de entrada y vivencia de salida en cada nodo: la tabla
+Construya el grafo de interferencia de registro. ( Puede ser una lista de aristas  )
+
+d = ( a + b ) * c                           d
+                                            * 
+                                +                     c       
+                  (      a             b )
+
+fun iszero(0) = true
+    | iszero(_) = false
+
+fun iszero(n) = if n == 0 then true else  false
+
+En  C
+
+struct estud {
+  char matri[10]
+  int cali
+}
+
+typedef struct estud estud
+
+union estud {
+  char matri[10]
+  int cali
+}
+
+typedef union estud estud
+
+func inorder  LEAF  = []
+              NODE(i, t1 , t2) = inorder(t1) @ [i] @ inorder(t2)
+
+
+a = 5 + 3
+print(a)
+
+s1; s2
+i = e
+i  e1 * e2
+
+Gramatica de evaluacion
+ S ->  1B 
+ S ->  2A =>
+ S ->  3C
+ B ->  1A =>
+ B ->  2C
+ B ->  3D =>
+ C ->  1D =>
+
+X86 Registros
+     AX   BX  CX   DX
+     DS   ES  SS   CS
+     SI   DI
+     IP   SP   BP
+32 bits
+     EAX   EBX  ECX   EDX
+
+ 
+
+
+

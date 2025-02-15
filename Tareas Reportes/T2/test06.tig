@@ -1,0 +1,43 @@
+/* test06.tig -- record and array creation expressions */
+let
+    /* forward reference, but not actually mutually recursive */
+    type tree = {datum : pair, left : tree, right : tree}
+    type pair = {key : string, val : int}
+
+    var t := 
+    tree {
+        datum = pair {
+            key = "chris", 
+            val = 42
+        },
+        left = tree {
+            datum = pair {
+                key = "a", 
+                val = val    /* err, unbound var */
+            }, 
+            left = nil,      /* ok */
+            right = t        /* err, unbound var */
+        },
+        right = pair {       /* err, wants a tree */
+            key = "league", 
+            val = nil        /* err, wants an int */
+        }
+    }
+
+    var p := pair {val = 3, key = "hi"}  /* err, wrong order */
+
+    type a1 = array of int
+    type a2 = array of a1
+    type a3 = array of a2
+
+    var x1 := a1 [32] of 0
+    var x2 := a2 [15] of x1
+    var x3 := a3 [7] of x2
+in
+    x3 := a3[9] of a2 [4] of a1 [3] of 67 /* ok */
+    ;
+    x2 := a3 [4] of a1 [3] of 67       /* err (x2) type mismatch */
+    ;
+    x3 := a3[9] of a2 [4] of 67       /* err */
+
+end
