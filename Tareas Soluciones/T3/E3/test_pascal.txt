@@ -1,0 +1,25 @@
+program ejemplo;
+var
+    x, y: integer;
+    z: real;
+    mensaje: string;
+
+procedure calcular(a: integer; b: real);
+begin
+    x := 42;
+    y := x + 10;
+    z := 3.14159;
+    mensaje := "Hola mundo";
+    
+    if x > 40 then
+        begin
+            z := z * 2.0;
+        end;
+    
+    while y > 0 do
+        begin
+            y := y - 1;
+        end;
+end;
+
+{ Este es un comentario de prueba }

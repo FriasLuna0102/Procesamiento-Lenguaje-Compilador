@@ -1,0 +1,8 @@
+if x then
+begin
+    for i
+    if test then
+        something
+    else
+        other
+end
